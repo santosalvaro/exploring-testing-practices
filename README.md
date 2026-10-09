@@ -44,8 +44,21 @@ Escolha uma prática ou dado de teste relevante e explique com suas próprias pa
 
 ## Respostas
 
-Repositório: `<URL_DO_REPOSITÓRIO>`
+Repositório: https://github.com/huggingface/transformers
+Links adicionais: https://github.com/huggingface/transformers/tree/main/tests
 
-URL TestMiner: `<URL_NO_TESTMINER>`
+URL TestMiner: https://andrehora.github.io/testminer/#huggingface/transformers
 
-Explicação: `<SUA_EXPLICAÇÃO>`
+Explicação: 
+Ao analisar o repositório `huggingface/transformers` no TestMiner e na pasta de testes oficial (`tests/`), observa-se uma arquitetura de testes altamente estruturada baseada no ecossistema `pytest`, combinada com estratégias rigorosas de segregação de testes e automação de CI (Integração Contínua). 
+
+Algumas das principais práticas observadas incluem:
+
+1. **Segregação Rigorosa por Nível e Escopo (Testes Unitários vs. Testes Lentos):**
+   O projeto utiliza amplamente *pytest markers* e decorators customizados para separar testes rápidos de testes lentos (`@slow`) e testes que dependem de GPU/CUDA. Essa prática otimiza o pipeline de CI e evita rodar suítes pesadas desnecessariamente em edições simples.
+
+2. **Organização Espelhada dos Arquivos de Teste:**
+   A estrutura dentro do diretório `tests/` espelha o código-fonte em `src/transformers/`. Por exemplo, testes para modelos ficam em `tests/models/`, facilitando a rastreabilidade e a localização dos arquivos de teste correspondentes a cada módulo.
+
+3. **Uso Intensivo de Parametrização e Fixtures:**
+   Como a biblioteca suporta diversas arquiteturas de modelos, utiliza-se parametrização (`@pytest.mark.parametrize`) e fixtures compartilhadas no `conftest.py` para reusar a lógica de testes entre diferentes modelos e tokenizadores.
